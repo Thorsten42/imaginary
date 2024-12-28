@@ -83,9 +83,11 @@ func determineAcceptMimeType(accept string) string {
 func imageHandler(w http.ResponseWriter, r *http.Request, buf []byte, operation Operation, o ServerOptions) {
 	// Infer the body MIME type via mime sniff algorithm
 	mimeType := http.DetectContentType(buf)
-
+  Debug("MIME type: %s", mimeType)
+	
 	// If cannot infer the type, infer it via magic numbers
 	if mimeType == "application/octet-stream" {
+		Debug("Here!")
 		kind, err := filetype.Get(buf)
 		if err == nil && kind.MIME.Value != "" {
 			mimeType = kind.MIME.Value
