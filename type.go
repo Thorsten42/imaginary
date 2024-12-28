@@ -26,6 +26,7 @@ func IsImageMimeTypeSupported(mime string) bool {
 	if format == "xml" {
 		format = "svg"
 	}
+	debug("format: %s", format)
 
 	return bimg.IsTypeNameSupported(format)
 }
