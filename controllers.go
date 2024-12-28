@@ -10,7 +10,7 @@ import (
 	"strings"
 
 	"github.com/h2non/bimg"
-	"github.com/h2non/filetype"
+	"github.com/Thorsten42/filetype"
 )
 
 func indexController(o ServerOptions) func(w http.ResponseWriter, r *http.Request) {
