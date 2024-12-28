@@ -87,6 +87,9 @@ func imageHandler(w http.ResponseWriter, r *http.Request, buf []byte, operation 
 	// If cannot infer the type, infer it via magic numbers
 	if mimeType == "application/octet-stream" {
 		kind, err := filetype.Get(buf)
+		
+		debug("kind: %s, err: %s", kind, err)
+		
 		if err == nil && kind.MIME.Value != "" {
 			mimeType = kind.MIME.Value
 		}
