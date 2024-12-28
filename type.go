@@ -8,11 +8,13 @@ import (
 
 // ExtractImageTypeFromMime returns the MIME image type.
 func ExtractImageTypeFromMime(mime string) string {
+	debug("mime: %s", mime)
 	mime = strings.Split(mime, ";")[0]
 	parts := strings.Split(mime, "/")
 	if len(parts) < 2 {
 		return ""
 	}
+	debug("parts: %s", parts)
 	name := strings.Split(parts[1], "+")[0]
 	return strings.ToLower(name)
 }
