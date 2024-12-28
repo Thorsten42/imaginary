@@ -101,9 +101,10 @@ func imageHandler(w http.ResponseWriter, r *http.Request, buf []byte, operation 
 			mimeType = "image/svg+xml"
 		}
 	}
-
+  debug("MIME type: %s", mimeType)
 	// Finally check if image MIME type is supported
 	if !IsImageMimeTypeSupported(mimeType) {
+		debug("MIME type: %s", mimeType)
 		ErrorReply(r, w, ErrUnsupportedMedia, o)
 		return
 	}
