@@ -83,17 +83,14 @@ func determineAcceptMimeType(accept string) string {
 func imageHandler(w http.ResponseWriter, r *http.Request, buf []byte, operation Operation, o ServerOptions) {
 	// Infer the body MIME type via mime sniff algorithm
 	mimeType := http.DetectContentType(buf)
-  debug("MIME type: %s", mimeType)
 	
 	// If cannot infer the type, infer it via magic numbers
 	if mimeType == "application/octet-stream" {
-		debug("Here!")
 		kind, err := filetype.Get(buf)
 		if err == nil && kind.MIME.Value != "" {
 			mimeType = kind.MIME.Value
 		}
 	}
-	debug("MIME type: %s", mimeType)
 	
 	// Infer text/plain responses as potential SVG image
 	if strings.Contains(mimeType, "text/plain") && len(buf) > 8 {
@@ -101,10 +98,10 @@ func imageHandler(w http.ResponseWriter, r *http.Request, buf []byte, operation 
 			mimeType = "image/svg+xml"
 		}
 	}
-  debug("MIME type: %s", mimeType)
+  debug("1MIME type: %s", mimeType)
 	// Finally check if image MIME type is supported
 	if !IsImageMimeTypeSupported(mimeType) {
-		debug("MIME type: %s", mimeType)
+		debug("2MIME type: %s", mimeType)
 		ErrorReply(r, w, ErrUnsupportedMedia, o)
 		return
 	}
